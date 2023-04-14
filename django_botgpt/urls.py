@@ -1,6 +1,5 @@
 """
 URL configuration for django_botgpt project.
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
 Examples:
@@ -20,7 +19,7 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='name')
+    path('', views.home, name='home')
 
 
 ]
