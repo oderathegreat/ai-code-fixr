@@ -20,18 +20,22 @@
 
                  <div class="form-group">
             <label for="exampleFormControlTextarea1">Paste Your Code</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1"  name="code" rows="3"></textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea1"  placeholder="Ai Fix my code" name="code" rows="3"></textarea>
           </div>
 
 
           <div class="form-group">
-    <label for="exampleFormControlSelect1">Select Language</label>
+    <label for="exampleFormControlSelect1">Select Programming Language</label>
     <select class="form-control" id="exampleFormControlSelect1">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
+
+        {% for lang in lang_list %}
+
+              <option value="{{ lang }}">{{ lang }}</option>
+
+        {% endfor %}
+
+
+
     </select>
   </div>
         <br><br>
