@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <pre>
 
+    {% if response %}
+    <pre>
     <code class="line-numbers language-python">
 
-    if name == "ted"
-      print("hey ted")
-    else:
-       print("not ted")
-    </code>
+     {{ response }}
 
+    </code>
     </pre>
+
+    {% endif %}
 
     <br><br>
     <form method="post" action="{% url 'home' %}">
@@ -26,7 +26,7 @@
 
           <div class="form-group">
     <label for="exampleFormControlSelect1">Select Programming Language</label>
-    <select class="form-control" id="exampleFormControlSelect1">
+    <select class="form-control" id="exampleFormControlSelect1" name="lang">
 
         {% for lang in lang_list %}
 
