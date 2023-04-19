@@ -1,8 +1,7 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
-
 
 import openai
 
@@ -91,3 +90,10 @@ def loginUser(request):
 
     else:
         return render(request, "index.html", {})
+
+
+def logoutUser(request):
+    logout(request)
+    messages.success(request, "You have been logged Out")
+    return redirect('/')
+
