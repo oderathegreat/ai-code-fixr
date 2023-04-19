@@ -26,6 +26,7 @@ def home(request):
                 frequncy_penalty=0.0,
                 presence_panalty=0.0
             )
+            response = (response["choices"][0]["text"]).strip()
 
             return render(request, "index.html", {'lang_list': lang_list, 'response': response, 'lang': lang})
 
@@ -34,3 +35,7 @@ def home(request):
             return render(request, "index.html", {'lang_list': lang_list, 'code': code, 'lang': lang})
 
     return render(request, "index.html", {'lang_list': lang_list})
+
+
+def suggest(request):
+    return render(request, "suggest.html", {})
