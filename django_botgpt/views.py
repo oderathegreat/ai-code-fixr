@@ -47,7 +47,7 @@ def suggest(request):
             messages.success(request, "You forgot to pick programming langage")
             return render(request, "suggest.html", {'lang_list': lang_list, 'code': code, 'lang': lang})
 
-        openai.api_key = "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"
+        openai.api_key = "pass-api-key"
         openai.Model.list()
 
         try:
