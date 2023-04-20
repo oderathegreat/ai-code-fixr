@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
+from .forms import SignUpForm
 
 import openai
 
@@ -97,3 +98,20 @@ def logoutUser(request):
     messages.success(request, "You have been logged Out")
     return redirect('/')
 
+
+def registerUser(request):
+    if request.method == "POST":
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+
+            user = authenticate(username=username,password=password)
+            login(request, user)
+            messages.success(request, "You have been registered successfully")
+            return redirect("/")
+
+    else:
+        form = SignUpForm
+    return render(request, "register.html", {"form" : form})
