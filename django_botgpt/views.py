@@ -123,3 +123,14 @@ def registerUser(request):
     else:
         form = SignUpForm
     return render(request, "register.html", {"form": form})
+
+
+def pastquest(request):
+    if request.user.is_authenticated:
+        # check specifi records belonging to an individual user
+        user_codes = Code.objects.filter(user_id=request.user.id)
+        return render(request, "pastquest.html", {"user_code":user_codes})
+
+    else:
+        messages.success(request, "You must be logged in to view this page")
+        return redirect("/")
