@@ -134,3 +134,10 @@ def pastquest(request):
     else:
         messages.success(request, "You must be logged in to view this page")
         return redirect("/")
+
+
+def  delete_past(request, Past_id):
+    past = Code.objects.get(pkid=Past_id)
+    past.delete()
+    messages.success(request, "Data deleted Successfully")
+    return redirect("pastquest")

@@ -24,5 +24,6 @@ urlpatterns = [
     path('login/', views.loginUser, name='login'),
     path('logout/', views.logoutUser, name='logout'),
     path('register/', views.registerUser, name='register'),
-    path('pastquest', views.pastquest, name='pastquest')
+    path('pastquest', views.pastquest, name='pastquest'),
+    path('delete_past/<Past_id>', views.delete_past, name='delete_past')
 ]
