@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm
+from .models import Code
 
 import openai
 
@@ -31,6 +32,10 @@ def home(request):
                 presence_panalty=0.0
             )
             response = (response["choices"][0]["text"]).strip()
+
+            # save code to database
+            record_data = Code(question=code, code_answer=response, language=lang, user=request.user)
+            record_data.save()
 
             return render(request, "index.html", {'lang_list': lang_list, 'response': response, 'lang': lang})
 
@@ -65,6 +70,9 @@ def suggest(request):
                 presence_panalty=0.0
             )
             response = (response["choices"][0]["text"]).strip()
+
+            record_data = Code(question=code, code_answer=response, language=lang, user=request.user)
+            record_data.save()
 
             return render(request, "suggest.html", {'lang_list': lang_list, 'response': response, 'lang': lang})
 
@@ -107,11 +115,11 @@ def registerUser(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
 
-            user = authenticate(username=username,password=password)
+            user = authenticate(username=username, password=password)
             login(request, user)
             messages.success(request, "You have been registered successfully")
             return redirect("/")
 
     else:
         form = SignUpForm
-    return render(request, "register.html", {"form" : form})
+    return render(request, "register.html", {"form": form})
